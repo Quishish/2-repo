@@ -8,4 +8,8 @@ GPIO.setup(leds, GPIO.OUT)
 
 GPIO.output(leds, 0)
 
+pwm = GPIO.PWM(12, 1000)
+
+pwm.stop()
+
 GPIO.cleanup()

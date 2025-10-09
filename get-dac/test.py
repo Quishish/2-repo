@@ -11,14 +11,20 @@ class PWM_DAC:
         GPIO.setup(self.__gpio_pin, GPIO.OUT, initial = 0)
 
         self.__pwm = GPIO.PWM(self.__gpio_pin, self.__pwm_frequency)
+        self.__pwm.start(0)
+
+        
+
+        
 
     def deinit(self):
         GPIO.output(self.__gpio_pin, 0)
         GPIO.cleanup()
+        self.__pwm.stop()
 
     def set_voltage(self, voltage):
 
-        drange = self.drange
+        drange = self.__dynamic_range
         if not (0.0 <= voltage <= drange):
 
             print(f"Voltage is beyond DAC vrange (0.00 - {drange:.2f} V)")
